@@ -135,9 +135,13 @@
                                 <span class="tiny"> ({{ file.size|filesize:"auto1000long" }}{% if file.file_type == "Image" and file.width > 0.0 and file.height > 0.0 %}, {{ file.width|floatformat }}x{{ file.height|floatformat }} px{% endif %})</span>
                             </td>
                             <td class="column-action">
-                                    <a href="#" class="action-button">Test Button</a>
+                                    <a href="#" class="action-button">
+                                        <i class="fa fa-eye-slash fa-lg" aria-hidden="true"></i>
+                                    </a>
 
-                                    <a href="{{ file.url }}" title="{% blocktrans with file.label as item_label %}Canonical url '{{ item_label }}'{% endblocktrans %}" class="action-button" target="_blank">View</a>
+                                    <a href="{{ file.url }}" title="{% blocktrans with file.label as item_label %}Canonical url '{{ item_label }}'{% endblocktrans %}" class="action-button" target="_blank">
+                                        <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
+                                    </a>
                                     
                                     <!-- <a href="{{ file.url }}" target="_blank"
                                     title="{% blocktrans with file.label as item_label %}Download '{{ item_label }}'{% endblocktrans %}" class="action-button"><span class="fa fa-download"></span></a> -->
