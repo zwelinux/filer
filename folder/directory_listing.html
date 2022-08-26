@@ -197,14 +197,14 @@
                                         <a href="#" class="js-action-move" title="{% trans 'Move' %}"><span class="fa fa-cut"></span></a>
                                     </li>
                                 </ul>
-                                <div class="filer-dropdown-container js-actions-menu">
+                                {% comment %} <div class="filer-dropdown-container js-actions-menu">
                                     <a href="#" data-toggle="filer-dropdown" aria-expanded="false" class="nav-button nav-button-dots">
                                         <span class="fa fa-ellipsis-h"></span>
                                     </a>
                                     <ul class="create-menu-dropdown filer-dropdown-menu">
                                         {# This list is populated in javascript #}
                                     </ul>
-                                </div>
+                                </div> {% endcomment %}
                             </div>
                         {% endif %}
                         {% block object-tools-items %}
