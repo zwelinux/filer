@@ -43,8 +43,8 @@
                 {% trans "Home" %}
             </a>
             &rsaquo;
-            <a href="{% url 'admin:app_list' app_label='filer' %}" title="{% trans 'Go back to Filer app' %}">
-                {% trans "Filer" %}
+            <a href="{% url 'admin:app_list' app_label='filer' %}" title="{% trans 'Go back to File Sharing' %}">
+                Filer
             </a>
             {% if not instance.is_root and instance.is_smart_folder %}
                 &rsaquo;

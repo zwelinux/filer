@@ -1,4 +1,6 @@
 {% load i18n l10n admin_list filer_tags filer_admin_tags static thumbnail %}
+
+
 <div class="drag-hover-border"></div>
 <section class="navigator{% if is_popup %} navigator-popup{% endif %}">
     <table class="js-filer-dropzone js-filer-dropzone-base navigator-table" id="result_list" data-url="{% if folder.id %}{% url 'admin:filer-ajax_upload' folder_id=folder.id %}{% else %}{% url 'admin:filer-ajax_upload' %}{% endif %}" data-folder-name="{% if folder.is_root %}{% trans 'Unsorted Uploads' %}{% else %}{{ folder.name }}{% endif %}" data-max-uploader-connections="{{ uploader_connections }}" data-max-file-size="500">
@@ -135,13 +137,43 @@
                                 <span class="tiny"> ({{ file.size|filesize:"auto1000long" }}{% if file.file_type == "Image" and file.width > 0.0 and file.height > 0.0 %}, {{ file.width|floatformat }}x{{ file.height|floatformat }} px{% endif %})</span>
                             </td>
                             <td class="column-action">
-                                    <a href="#" class="action-button">
-                                        <i class="fa fa-eye-slash fa-lg" aria-hidden="true"></i>
-                                    </a>
+                                    {% if ".pptx" in file.url %}
+                                        <a href="https://view.officeapps.live.com/op/view.aspx?src={{ file.url }}#toolbar=0" target="iframe_a" class="action-button">
+                                            <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
+                                        </a>
+                                    {% elif ".docx" in file.url %}
+                                        <a href="https://view.officeapps.live.com/op/view.aspx?src={{ file.url }}#toolbar=0" target="iframe_a" class="action-button">
+                                            <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
+                                        </a>
+                                    {% elif ".xlsx" in file.url %}
+                                        <a href="https://view.officeapps.live.com/op/view.aspx?src={{ file.url }}#toolbar=0" target="iframe_a" class="action-button">
+                                            <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
+                                        </a>
+                                    {% elif ".pdf" in file.url %}
+                                        <a href="{{ file.url }}" target="_blank" class="action-button">
+                                            <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
+                                        </a>
+                                    {% elif ".jpg" in file.url %}
+                                        <a href="{{ file.url }}" target="iframe_a" title="{% blocktrans with file.label as item_label %}Canonical url '{{ item_label }}'{% endblocktrans %}" class="action-button" target="_blank">
+                                            <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
+                                        </a>
+                                    {% elif ".html" in file.url %}
+                                        <a href="{{ file.url }}" target="iframe_a" title="{% blocktrans with file.label as item_label %}Canonical url '{{ item_label }}'{% endblocktrans %}" class="action-button" target="_blank">
+                                            <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
+                                        </a>
+                                    {% elif ".mp4" in file.url %}
+                                        <a href="{{ file.url }}" target="_blank" class="action-button">
+                                            <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
+                                        </a>
+                                    {% elif ".mp3" in file.url %}
+                                        <a href="{{ file.url }}" title="{% blocktrans with file.label as item_label %}Canonical url '{{ item_label }}'{% endblocktrans %}" class="action-button" target="_blank">
+                                            <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
+                                        </a>
+                                    {% endif %}
 
-                                    <a href="{{ file.url }}" title="{% blocktrans with file.label as item_label %}Canonical url '{{ item_label }}'{% endblocktrans %}" class="action-button" target="_blank">
+                                    {% comment %} <a href="{{ file.url }}" title="{% blocktrans with file.label as item_label %}Canonical url '{{ item_label }}'{% endblocktrans %}" class="action-button" target="_blank">
                                         <i class="fa fa-eye fa-lg" aria-hidden="true"></i>
-                                    </a>
+                                    </a> {% endcomment %}
                                     
                                     <!-- <a href="{{ file.url }}" target="_blank"
                                     title="{% blocktrans with file.label as item_label %}Download '{{ item_label }}'{% endblocktrans %}" class="action-button"><span class="fa fa-download"></span></a> -->
@@ -159,6 +191,8 @@
             {% endfor %}
         </tbody>
     </table>
+
+
 
     <div class="filer-dropzone-info-message js-filer-dropzone js-filer-dropzone-info-message hidden" data-url="{% if folder.id %}{% url 'admin:filer-ajax_upload' folder_id=folder.id %}{% else %}{% url 'admin:filer-ajax_upload' %}{% endif %}" data-folder-name="{% if folder.is_root %}{% trans 'Unsorted Uploads' %}{% else %}{{ folder.name }}{% endif %}" data-max-uploader-connections="{{ uploader_connections }}" data-max-file-size="500">
         <div class="icon"><span class="fa fa-cloud-upload"></span></div>
@@ -229,3 +263,13 @@
         </div>
     </div>
 </section>
+
+
+    {% comment %} <div name="iframe_shower">
+            <p align='center'>
+                <iframe src='https://view.officeapps.live.com/op/view.aspx?src=https://waaneiza-filesharing.s3.amazonaws.com/filer_public/fe/92/fe927b6f-50ba-4f1a-8bfc-77fa964b594d/01-thewaaneizaorganization01august2022.pptx#toolbar=0' width='65%' height='500px' style="margin-top: -92px" frameborder='0'>
+            </p>
+    </div>  {% endcomment %}
+    <p align='center'>
+        <iframe name="iframe_a"  width='75%' height='600px' style="margin-top: -92px" frameborder="0"  title="Iframe Example" ></iframe>
+    </p>
